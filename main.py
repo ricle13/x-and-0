@@ -1,3 +1,5 @@
+check = ('0', '1', '2', '3', '4', '5', '6', '7', '8')
+
 def conclusion(board):
     print(f'''
  {board[0]} | {board[1]} | {board[2]}
@@ -24,7 +26,6 @@ def check_win_line(board):
     
 
 def step(board, turn):
-    check = ('0', '1', '2', '3', '4', '5', '6', '7', '8')
     while True:
         step = input(f'Ходит {turn}: ')
         if step in check:
@@ -48,7 +49,11 @@ def x_o_step(board, x_step):
             
 def empy_board(): return [coard for coard in range(9)]
 
-
+def draw(board):
+    for cord in board:
+        if str(cord) in check:
+            return True
+    return False
 
 def main():
     print('Игра крестики нолики!')
@@ -62,6 +67,11 @@ def main():
         if win == True:
             conclusion(board)
             print(f'---Выиграл {winer}!---')
+            break
+        print(board)
+        if draw(board) == False:
+            conclusion(board)
+            print('---Ничья!---')
             break
     again = input('Сыграть снова?(y/n): ')
     if again == 'y':
